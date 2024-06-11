@@ -111,26 +111,16 @@ async fn load_textures() -> Vec<Texture2D> {
 #[macroquad::main(get_window_conf)]
 async fn main() {
     let textures: Vec<Texture2D> = load_textures().await;
-    //let first_tex = load_texture("1.png").await.unwrap();
-    // let rustacean_tex = load_texture("rustacean_happy.png").await.unwrap();
-    //first_tex.set_filter(FilterMode::Linear);
 
     let mut cam = Camera2D::from_display_rect(Rect::new(0., 0., WORLD_WIDTH, WORLD_HEIGHT));
     cam.zoom = Vec2::new(cam.zoom.x, -cam.zoom.y); // workaround for https://github.com/not-fl3/macroquad/issues/171
 
     // TODO: create buttons!
-    
 
     loop {
         clear_background(Color::default());
 
-        // if macroquad::input::is_mouse_button_down(MouseButton::Left) {
-        // }
-
         set_camera(&cam);
-        // unsafe {
-        //     window::get_internal_gl().quad_gl.scissor(Some((0, 0, WORLD_WIDTH as i32, WORLD_HEIGHT as i32)));
-        // }
 
         let params = DrawTextureParams {
             dest_size: Some(Vec2::new(WORLD_WIDTH, WORLD_HEIGHT)),
@@ -138,13 +128,6 @@ async fn main() {
         };
 
         draw_texture_ex(&textures[0], 0., 0., WHITE, params);
-
-        // unsafe {
-        //     window::get_internal_gl().quad_gl.scissor(None);
-        // }
-
-        // def_cam.viewport = Some((0, 0, screen_width() as i32, screen_height() as i32));
-        // set_camera(&def_cam);
 
         set_default_camera();
 
